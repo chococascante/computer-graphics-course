@@ -1,3 +1,6 @@
 .DS_Store
 Proyecto1/salida/
+Proyecto3/raytrace_poc
+Proyecto3/*.o
+Proyecto3/*.ppm
 lineas

@@ -1,0 +1,71 @@
+# Escena: Muñeco de nieve clásico — 18 esferas
+#
+# Composición:
+#   1 suelo (esfera enorme nevada)
+#   3 bolas blancas apiladas (cuerpo, torso, cabeza)
+#   2 ojos de carbón
+#   1 nariz de zanahoria (naranja)
+#   5 esferitas de carbón formando una sonrisa
+#   4 esferas marrones para los dos brazos (palitos, 2 c/u)
+#   2 esferas para el sombrero de copa (ala + copa)
+
+RES 1024 768
+OUT snowman.ppm
+MODE BOTH
+SHADING PHONG
+
+# Ambiente nocturno frío
+AMBIENT 0.18 0.20 0.28
+# Cielo azul oscuro
+BG      0.18 0.28 0.45
+
+# Cámara fija mirando hacia -Z, levemente arriba del centro del muñeco
+CAM 0 0.8 5.0   50
+
+# Luz principal: blanca cálida (luna alta-derecha)
+LIGHT  3   8   4      1.00 0.95 0.85
+# Luz de relleno: azul fría desde la izquierda baja (reflejo de la nieve)
+LIGHT -4   2   3      0.45 0.55 0.75
+# Luz cenital tenue
+LIGHT  0  10   0      0.30 0.30 0.35
+
+# ---------- Suelo nevado (esfera enorme blanca-azulada) ----------
+#       cx     cy        cz     r        Kd_r   Kd_g   Kd_b   Ks    n
+SPHERE  0    -101.00    0    100.0     0.85   0.88   0.92   0.10    8
+
+# ---------- Bola inferior (cuerpo grande) ----------
+SPHERE  0     -0.30     0      0.70   0.95   0.95   0.97   0.10    8
+
+# ---------- Bola media (torso) ----------
+SPHERE  0      0.65     0      0.50   0.95   0.95   0.97   0.10    8
+
+# ---------- Bola superior (cabeza) ----------
+SPHERE  0      1.45     0      0.35   0.95   0.95   0.97   0.10    8
+
+# ---------- Ojos de carbón (negros, ligeramente brillantes) ----------
+SPHERE -0.12   1.55     0.28   0.05   0.04   0.04   0.05   0.40   32
+SPHERE  0.12   1.55     0.28   0.05   0.04   0.04   0.05   0.40   32
+
+# ---------- Nariz de zanahoria (naranja, mate) ----------
+SPHERE  0      1.40     0.36   0.07   0.95   0.45   0.10   0.20   16
+
+# ---------- Boca: 5 esferitas de carbón formando una sonrisa ----------
+SPHERE -0.16   1.27     0.27   0.025  0.04   0.04   0.05   0.30   32
+SPHERE -0.09   1.23     0.30   0.025  0.04   0.04   0.05   0.30   32
+SPHERE  0      1.22     0.32   0.025  0.04   0.04   0.05   0.30   32
+SPHERE  0.09   1.23     0.30   0.025  0.04   0.04   0.05   0.30   32
+SPHERE  0.16   1.27     0.27   0.025  0.04   0.04   0.05   0.30   32
+
+# ---------- Brazos: cada uno hecho de 2 esferas marrones alineadas ----------
+# Brazo izquierdo
+SPHERE -0.75   0.95     0.10   0.07   0.30   0.18   0.10   0.15   12
+SPHERE -1.15   1.20     0.20   0.07   0.30   0.18   0.10   0.15   12
+# Brazo derecho
+SPHERE  0.75   0.95     0.10   0.07   0.30   0.18   0.10   0.15   12
+SPHERE  1.15   1.20     0.20   0.07   0.30   0.18   0.10   0.15   12
+
+# ---------- Sombrero de copa (ala más grande + copa pequeña encima) ----------
+# Ala (esfera grande achatada visualmente porque sobresale a los lados)
+SPHERE  0      1.85     0      0.45   0.05   0.05   0.06   0.55   64
+# Copa
+SPHERE  0      2.20     0      0.25   0.05   0.05   0.06   0.55   64

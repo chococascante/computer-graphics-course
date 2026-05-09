@@ -1,0 +1,61 @@
+# Escena Kirby — 13 esferas
+#
+# Convenciones:
+#   - Cámara fija mirando hacia -Z, ojo en (0, 0.5, 4.5).
+#   - Kirby está centrado cerca del origen, mirando hacia la cámara (+Z).
+#   - El "suelo" es una esfera enorme debajo (radio 100) cuya superficie
+#     superior queda justo a la altura de los pies.
+#
+# Conteo:
+#   1 cuerpo + 2 brazos + 2 pies + 2 ojos + 2 highlights + 2 mejillas
+#   + 1 boca + 1 suelo = 13 esferas
+
+RES 1024 768
+OUT kirby.ppm
+MODE BOTH
+SHADING PHONG
+
+# Luz ambiente cálida tenue
+AMBIENT 0.18 0.16 0.18
+# Cielo color rosa pastel detrás
+BG      0.95 0.85 0.90
+
+# Cámara: ojo a la altura del torso, ligeramente al frente
+CAM 0 0.5 4.5   50
+
+# Luz principal blanca cálida desde arriba-izquierda
+LIGHT -4   6   3      1.00 0.95 0.85
+# Luz de relleno azul fría desde la derecha
+LIGHT  5   2   3      0.45 0.55 0.85
+# Pequeño aporte cenital
+LIGHT  0   8  -1      0.30 0.30 0.30
+
+# ---------- Suelo (verde claro tipo pradera) ----------
+#       cx     cy        cz     r        Kd_r   Kd_g   Kd_b   Ks    n
+SPHERE  0    -100.85    0    100.0     0.45   0.65   0.40   0.05    8
+
+# ---------- Cuerpo principal (rosa Kirby) ----------
+SPHERE  0       0.50    0      1.00    0.98   0.62   0.70   0.25   24
+
+# ---------- Brazos (rosa Kirby, mismo material) ----------
+SPHERE -0.95    0.40    0.10   0.32    0.98   0.62   0.70   0.25   24
+SPHERE  0.95    0.40    0.10   0.32    0.98   0.62   0.70   0.25   24
+
+# ---------- Pies (zapatos rojos brillantes) ----------
+SPHERE -0.45   -0.50    0.25   0.40    0.85   0.10   0.15   0.65   80
+SPHERE  0.45   -0.50    0.25   0.40    0.85   0.10   0.15   0.65   80
+
+# ---------- Ojos (azul muy oscuro, casi negro, muy brillantes) ----------
+SPHERE -0.27    0.72    0.92   0.11    0.05   0.05   0.12   0.90  256
+SPHERE  0.27    0.72    0.92   0.11    0.05   0.05   0.12   0.90  256
+
+# ---------- Highlights de los ojos (blancos, brillantes) ----------
+SPHERE -0.24    0.80    1.01   0.040   0.98   0.98   1.00   0.85  128
+SPHERE  0.30    0.80    1.01   0.040   0.98   0.98   1.00   0.85  128
+
+# ---------- Mejillas (rosa oscuro, mate) ----------
+SPHERE -0.55    0.40    0.85   0.13    0.95   0.35   0.45   0.10   12
+SPHERE  0.55    0.40    0.85   0.13    0.95   0.35   0.45   0.10   12
+
+# ---------- Boca (rojo oscuro pequeño) ----------
+SPHERE  0       0.45    0.96   0.07    0.55   0.10   0.20   0.40   48

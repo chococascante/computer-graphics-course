@@ -161,7 +161,7 @@ int main(int argc, char *argv[]) {
     }
 
     SDL_Window *ventana_sdl = SDL_CreateWindow(
-        "Proyecto 2 — 1 alambre 2 relleno 3 texturas 4 una textura | +/- zoom flechas pan [] rotar | Inicio/R "
+        "Proyecto 2 — 1 alambre 2 relleno 3 texturas 4 una textura | +/- zoom (Mayús=más brusco) pan [] rotar | Inicio/R "
         "reinicio | Q salir",
         SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, ancho, alto, SDL_WINDOW_SHOWN);
     if (!ventana_sdl) {
@@ -222,7 +222,8 @@ int main(int argc, char *argv[]) {
             // Rueda: mismo centro de ventana mundo, se encoge o agranda el rectángulo visible.
             if (ev.type == SDL_MOUSEWHEEL) {
                 int rapido = (SDL_GetModState() & KMOD_SHIFT) != 0;
-                double z = rapido ? 0.88 : 0.95;
+                /* Sin Mayús ~5% por paso; con Mayús ~15% (se nota; antes 8% la diferencia era sutil). */
+                double z = rapido ? 0.80 : 0.95;
                 if (ev.wheel.y > 0)
                     acercar_o_alejar(&ventana, z);
                 else if (ev.wheel.y < 0)
@@ -233,10 +234,11 @@ int main(int argc, char *argv[]) {
                 int rapido = (ev.key.keysym.mod & KMOD_SHIFT) != 0;
                 double ancho_m = ventana.wxmax - ventana.wxmin;
                 double alto_m = ventana.wymax - ventana.wymin;
-                double fraccion_pan = rapido ? 0.06 : 0.02;
+                double fraccion_pan = rapido ? 0.10 : 0.02;
                 double paso_x = ancho_m * fraccion_pan;
                 double paso_y = alto_m * fraccion_pan;
-                double z = rapido ? 0.88 : 0.95;
+                /* Misma escala “normal / brusco” que la rueda. */
+                double z = rapido ? 0.80 : 0.95;
                 double paso_rot = rapido ? (30.0 * M_PI / 180.0) : (15.0 * M_PI / 180.0);
 
                 switch (ev.key.keysym.sym) {

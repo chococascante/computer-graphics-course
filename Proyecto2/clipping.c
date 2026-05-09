@@ -1,4 +1,3 @@
-/* CS = aristas (alámbrico, contornos). SH = polígonos rellenos, contra el mismo rect VentanaMundo. */
 #include "clipping.h"
 #include <math.h>
 
